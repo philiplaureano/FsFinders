@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsFinders", "FsFinders\FsFinders.fsproj", "{39E7B6B2-4722-4B3B-A9F8-04037116CC82}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{3DE30C61-500D-4C99-BAA1-71C0AC749BA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39E7B6B2-4722-4B3B-A9F8-04037116CC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39E7B6B2-4722-4B3B-A9F8-04037116CC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39E7B6B2-4722-4B3B-A9F8-04037116CC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39E7B6B2-4722-4B3B-A9F8-04037116CC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE30C61-500D-4C99-BAA1-71C0AC749BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE30C61-500D-4C99-BAA1-71C0AC749BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE30C61-500D-4C99-BAA1-71C0AC749BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE30C61-500D-4C99-BAA1-71C0AC749BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9386D868-A38A-45B0-891E-7A423A734C6D}
+	EndGlobalSection
+EndGlobal
