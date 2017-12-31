@@ -1,6 +1,9 @@
 ﻿namespace FsFinders
 
 module Finders = 
+    open System
+    open System.Collections
+    open System.Collections.Generic
     type FinderScore(criticalHits : int, criticalMisses : int, normalHits : int, optionalHits : int, totalNumberOfTests) = 
         member this.CriticalHits = criticalHits
         member this.CriticalMisses = criticalMisses 
@@ -35,10 +38,13 @@ module Finders =
                                 | Some s -> s
                                 | _ -> new FinderScore(0,0,0,0,0) 
     
-    let ToFuzzyList<'a>(items : 'a seq) = items |> Seq.map (fun item -> new FuzzyItem<_>(item, None))
+    let ToWeightedList<'a>(items : 'a seq) = items |> Seq.map (fun item -> new FuzzyItem<_>(item, None))
     let GetScore<'a>(item : FuzzyItem<'a>) = 
         item.Score
-
+        
+    let Unwrap<'a>(items : FuzzyItem<'a> seq) =
+        items |> Seq.map(fun item->item.Item)             
+        
 module Criteria =
     let Critical<'a>(test : 'a -> bool) (item : Finders.FuzzyItem<'a>) = 
         let score = item.Score                                   
@@ -63,3 +69,23 @@ module Criteria =
             new Finders.FuzzyItem<_>(item.Item, score.AddOptionalHits(1) |> Some)        
         else
             item
+
+module FilterBy =
+    let Critical<'a>(test : 'a -> bool) (items : Finders.FuzzyItem<'a> seq) = 
+            items |> Seq.map(fun item -> Criteria.Critical<_> test item)
+            
+    let Standard<'a>(test : 'a -> bool) (items : Finders.FuzzyItem<'a> seq) = 
+        items |> Seq.map(fun item -> Criteria.Standard<_> test item)
+    
+    let Optional<'a>(test : 'a -> bool) (items : Finders.FuzzyItem<'a> seq) = 
+            items |> Seq.map(fun item -> Criteria.Optional<_> test item)
+    
+    let Confidence<'a>(threshold : float) (items : Finders.FuzzyItem<'a> seq) = 
+        let getConfidence (item : Finders.FuzzyItem<'a>) =
+            let score = item.Score
+            let confidence = match score.Confidence with
+                                | Some c -> c
+                                | None -> 0.0
+            confidence
+            
+        items |> Seq.filter(fun item->getConfidence item >= threshold)
